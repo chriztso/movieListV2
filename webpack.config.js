@@ -1,7 +1,7 @@
 
 module.exports = {
-    entry: __dirname + '/src/index.js', 
-    modules: {
+    entry: __dirname + '/src/index.jsx', 
+    module: {
         rules: [
             {
                 test: [/\.jsx$/],
