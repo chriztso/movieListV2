@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import Avatar from '@material-ui/core/Avatar';
 
 const styles = theme => ({
   root: {
@@ -16,6 +17,9 @@ const styles = theme => ({
   },
   title: {
     flexGrow: 1,
+  },
+  avatar: {
+    margin: 10,
   },
 });
 
@@ -37,10 +41,10 @@ class App extends React.Component{
                     <MenuIcon />
                   </IconButton>
                   <Typography variant="h6" className={classes.title}>
-                    Movie List 
+                    Movie List
                   </Typography>
-                  <Button color="inherit">Login</Button>
-                  </Toolbar>
+                  <Avatar className={classes.avatar}>CT</Avatar>
+                </Toolbar>
               </AppBar>
             </div>
         )
