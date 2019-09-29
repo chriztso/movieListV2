@@ -8,6 +8,11 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Avatar from '@material-ui/core/Avatar';
 import SvgIcon from '@material-ui/core/SvgIcon';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import Divider from '@material-ui/core/Divider';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
 
 const styles = theme => ({
   root: {
@@ -21,6 +26,11 @@ const styles = theme => ({
   },
   avatar: {
     margin: 10,
+  },
+  root: {
+    width: '100%',
+    maxWidth: 360,
+    backgroundColor: theme.palette.background.paper,
   },
 });
 
@@ -55,6 +65,22 @@ class App extends React.Component{
                   <Avatar className={classes.avatar}>CT</Avatar>
                 </Toolbar>
               </AppBar>
+             
+              <div style={{position: 'relative', 'top': '20px'}}>
+                <ButtonGroup
+                  color="primary"
+                  fullWidth
+                  aria-label="full width primary button group"
+                >
+                  <Button>To Watch</Button>
+                  <Button>Watched</Button>
+                </ButtonGroup>
+                <List component="nav" aria-label="main mailbox folders">
+                 <ListItem button>
+                     <ListItemText primary="Test"></ListItemText>
+                 </ListItem>
+                </List>
+              </div>
             </div>
         )
     }
