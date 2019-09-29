@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Avatar from '@material-ui/core/Avatar';
+import SvgIcon from '@material-ui/core/SvgIcon';
 
 const styles = theme => ({
   root: {
@@ -23,6 +24,13 @@ const styles = theme => ({
   },
 });
 
+function HomeIcon(props) {
+    return (
+      <SvgIcon {...props}>
+        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+      </SvgIcon>
+    );
+  }
 
 class App extends React.Component{
     constructor(props){
@@ -40,6 +48,7 @@ class App extends React.Component{
                   <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
                     <MenuIcon />
                   </IconButton>
+                  <HomeIcon />
                   <Typography variant="h6" className={classes.title}>
                     Movie List
                   </Typography>
