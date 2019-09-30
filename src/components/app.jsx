@@ -46,11 +46,37 @@ class App extends React.Component{
     constructor(props){
         super(props); 
         this.state = {
-
+            watched: false, 
+            toWatch: true
         }
+        this.switchToWatched = this.switchToWatched.bind(this)
+        this.switchToNotWatched = this.switchToNotWatched.bind(this)
+    }
+    switchToWatched(){
+        this.setState({watched: true, toWatch: false})
+    }
+    switchToNotWatched(){
+        this.setState({watched: false, toWatch: true})
     }
     render(){
         const {classes} = this.props;
+        const {watched} = this.state;
+        let list; 
+        if(watched){
+            list = 
+            <List component="nav" aria-label="main mailbox folders">
+              <ListItem button>
+                  <ListItemText primary="Watched"></ListItemText>
+              </ListItem>
+            </List>
+        } else {
+            list = 
+            <List component="nav" aria-label="main mailbox folders">
+              <ListItem button>
+                  <ListItemText primary="Not Watched"></ListItemText>
+              </ListItem>
+            </List>
+        }
         return (
             <div> 
               <AppBar position="static">
@@ -72,14 +98,12 @@ class App extends React.Component{
                   fullWidth
                   aria-label="full width primary button group"
                 >
-                  <Button>To Watch</Button>
-                  <Button>Watched</Button>
+                  <Button onClick={this.switchToNotWatched}>To Watch</Button>
+                  <Button onClick={this.switchToWatched}>Watched</Button>
                 </ButtonGroup>
-                <List component="nav" aria-label="main mailbox folders">
-                 <ListItem button>
-                     <ListItemText primary="Test"></ListItemText>
-                 </ListItem>
-                </List>
+              </div>
+              <div style={{position: 'relative', 'top': '10px'}}>
+                {list}
               </div>
             </div>
         )
