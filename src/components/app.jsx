@@ -126,7 +126,7 @@ class App extends React.Component{
                 </ButtonGroup>
               </div>
               <div style={{position: 'relative', 'top': '10px'}}>
-                {movies.map(movie => {<ExpansionPanelOne movie={movie} />})}
+                {movies.map(movie => <ExpansionPanelOne movie={movie} />)}
               </div>
             </div>
         )
