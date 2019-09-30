@@ -13,6 +13,9 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
+import ExpansionPanelOne from './listItem.jsx'
+import TextField from '@material-ui/core/TextField';
+
 
 const styles = theme => ({
   root: {
@@ -32,6 +35,14 @@ const styles = theme => ({
     maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
   },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: 700,
+  },
+  button: {
+    margin: theme.spacing(1),
+  },
 });
 
 function HomeIcon(props) {
@@ -41,6 +52,7 @@ function HomeIcon(props) {
       </SvgIcon>
     );
   }
+
 
 class App extends React.Component{
     constructor(props){
@@ -91,7 +103,17 @@ class App extends React.Component{
                   <Avatar className={classes.avatar}>CT</Avatar>
                 </Toolbar>
               </AppBar>
-             
+              <div style = {{display: 'flex', flexDirection: 'row'}}>
+                <TextField
+                  id="standard-name"
+                  label="Movie"
+                  className={classes.textField}
+                  margin="normal"
+                />
+                <Button variant="contained" color="primary" className={classes.button}>
+                  Add TO Watch List
+                </Button>
+              </div>
               <div style={{position: 'relative', 'top': '20px'}}>
                 <ButtonGroup
                   color="primary"
@@ -103,7 +125,7 @@ class App extends React.Component{
                 </ButtonGroup>
               </div>
               <div style={{position: 'relative', 'top': '10px'}}>
-                {list}
+                <ExpansionPanelOne />
               </div>
             </div>
         )
