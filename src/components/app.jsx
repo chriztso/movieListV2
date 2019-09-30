@@ -59,10 +59,14 @@ class App extends React.Component{
         super(props); 
         this.state = {
             watched: false, 
-            toWatch: true
+            toWatch: true, 
+            movies: [], 
+            movie: null
         }
         this.switchToWatched = this.switchToWatched.bind(this)
         this.switchToNotWatched = this.switchToNotWatched.bind(this)
+        this.handleInput = this.handleInput.bind(this)
+        this.addMovie = this.addMovie.bind(this)
     }
     switchToWatched(){
         this.setState({watched: true, toWatch: false})
@@ -70,25 +74,21 @@ class App extends React.Component{
     switchToNotWatched(){
         this.setState({watched: false, toWatch: true})
     }
+    handleInput(event){
+      this.setState({movie: event.target.value})
+    }
+    addMovie(){
+      const {movies, movie} = this.state; 
+      console.log(movies)
+      movies.push(movie); 
+      this.setState({movies: movies})
+    }
     render(){
         const {classes} = this.props;
-        const {watched} = this.state;
-        let list; 
-        if(watched){
-            list = 
-            <List component="nav" aria-label="main mailbox folders">
-              <ListItem button>
-                  <ListItemText primary="Watched"></ListItemText>
-              </ListItem>
-            </List>
-        } else {
-            list = 
-            <List component="nav" aria-label="main mailbox folders">
-              <ListItem button>
-                  <ListItemText primary="Not Watched"></ListItemText>
-              </ListItem>
-            </List>
-        }
+        const {watched, movies} = this.state;
+        //let list = movies.map(movie => {<ExpansionPanelOne movie ={movie}></ExpansionPanelOne>})
+
+        
         return (
             <div> 
               <AppBar position="static">
@@ -108,9 +108,10 @@ class App extends React.Component{
                   id="standard-name"
                   label="Movie"
                   className={classes.textField}
+                  onChange={(event) => {this.handleInput(event)}}
                   margin="normal"
                 />
-                <Button variant="contained" color="primary" className={classes.button}>
+                <Button variant="contained" color="primary" className={classes.button} onClick={() => {this.addMovie()}}>
                   Add TO Watch List
                 </Button>
               </div>
@@ -125,7 +126,7 @@ class App extends React.Component{
                 </ButtonGroup>
               </div>
               <div style={{position: 'relative', 'top': '10px'}}>
-                <ExpansionPanelOne />
+                {movies.map(movie => {<ExpansionPanelOne movie={movie} />})}
               </div>
             </div>
         )
