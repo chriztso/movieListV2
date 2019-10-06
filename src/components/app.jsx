@@ -61,12 +61,14 @@ class App extends React.Component{
             watched: false, 
             toWatch: true, 
             movies: [], 
-            movie: null
+            movie: null, 
+            id: 0
         }
         this.switchToWatched = this.switchToWatched.bind(this)
         this.switchToNotWatched = this.switchToNotWatched.bind(this)
         this.handleInput = this.handleInput.bind(this)
         this.addMovie = this.addMovie.bind(this)
+        this.deleteMovie = this.deleteMovie.bind(this)
     }
     switchToWatched(){
         this.setState({watched: true, toWatch: false})
@@ -78,10 +80,20 @@ class App extends React.Component{
       this.setState({movie: event.target.value})
     }
     addMovie(){
-      const {movies, movie} = this.state; 
-      console.log(movies)
-      movies.push(movie); 
+      const {movies, movie, id} = this.state; 
+      var movieObj = {
+        'id': id, 
+        'title': movie
+      }
+      movies.push(movieObj); 
       this.setState({movies: movies})
+      this.setState({id: id+1})
+    }
+    deleteMovie(id){
+      console.log(id)
+      const {movies} = this.state; 
+      var remaining = movies.filter(function(x){return x.id !== id}); 
+      this.setState({movies: remaining})
     }
     render(){
         const {classes} = this.props;
@@ -126,7 +138,7 @@ class App extends React.Component{
                 </ButtonGroup>
               </div>
               <div style={{position: 'relative', 'top': '10px'}}>
-                {movies.map(movie => <ExpansionPanelOne movie={movie} />)}
+                {movies.map(movie => <ExpansionPanelOne movie={movie.title} deleteMovie ={this.deleteMovie} id={movie.id}/>)}
               </div>
             </div>
         )
