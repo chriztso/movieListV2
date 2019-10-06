@@ -15,6 +15,7 @@ import Divider from '@material-ui/core/Divider';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import ExpansionPanelOne from './listItem.jsx'
 import TextField from '@material-ui/core/TextField';
+import Axios from 'axios';
 
 
 const styles = theme => ({
@@ -106,6 +107,7 @@ class App extends React.Component{
       var remaining = movies.filter(function(x){return x.id !== id}); 
       this.setState({movies: remaining})
     }
+  
     render(){
         const {classes} = this.props;
         const {watched, movies} = this.state;
@@ -114,11 +116,11 @@ class App extends React.Component{
         var list;
         if(watched){
           list = <div> 
-            {watchedList.map(movie => <ExpansionPanelOne movie={movie.title} deleteMovie ={this.deleteMovie} id={movie.id} toggleWatched={this.toggleWatched}/>)}
+            {watchedList.map(movie => <ExpansionPanelOne movie={movie.title} deleteMovie ={this.deleteMovie} id={movie.id} toggleWatched={this.toggleWatched} />)}
           </div>
         } else{
           list = <div> 
-            {notWatchedList.map(movie => <ExpansionPanelOne movie={movie.title} deleteMovie ={this.deleteMovie} id={movie.id} toggleWatched={this.toggleWatched}/>)}
+            {notWatchedList.map(movie => <ExpansionPanelOne movie={movie.title} deleteMovie ={this.deleteMovie} id={movie.id} toggleWatched={this.toggleWatched} />)}
           </div>
         }
         
