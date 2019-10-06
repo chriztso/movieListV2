@@ -69,6 +69,7 @@ class App extends React.Component{
         this.handleInput = this.handleInput.bind(this)
         this.addMovie = this.addMovie.bind(this)
         this.deleteMovie = this.deleteMovie.bind(this)
+        this.toggleWatched = this.toggleWatched.bind(this)
     }
     switchToWatched(){
         this.setState({watched: true, toWatch: false})
@@ -83,11 +84,21 @@ class App extends React.Component{
       const {movies, movie, id} = this.state; 
       var movieObj = {
         'id': id, 
-        'title': movie
+        'title': movie, 
+        'watched': false
       }
       movies.push(movieObj); 
       this.setState({movies: movies})
       this.setState({id: id+1})
+    }
+    toggleWatched(id){
+      const {movies} = this.state
+      console.log(id)
+      var index = movies.findIndex(function(x){return x.id === id}); 
+      var oldObj = movies[index]; 
+      var newObj = {...oldObj, watched: true}; 
+      movies[index] = newObj; 
+      this.setState({movies: movies})
     }
     deleteMovie(id){
       console.log(id)
@@ -98,8 +109,18 @@ class App extends React.Component{
     render(){
         const {classes} = this.props;
         const {watched, movies} = this.state;
-        //let list = movies.map(movie => {<ExpansionPanelOne movie ={movie}></ExpansionPanelOne>})
-
+        const notWatchedList = movies.filter(function(x){return x.watched === false});
+        const watchedList = movies.filter(function(x){return x.watched === true});
+        var list;
+        if(watched){
+          list = <div> 
+            {watchedList.map(movie => <ExpansionPanelOne movie={movie.title} deleteMovie ={this.deleteMovie} id={movie.id} toggleWatched={this.toggleWatched}/>)}
+          </div>
+        } else{
+          list = <div> 
+            {notWatchedList.map(movie => <ExpansionPanelOne movie={movie.title} deleteMovie ={this.deleteMovie} id={movie.id} toggleWatched={this.toggleWatched}/>)}
+          </div>
+        }
         
         return (
             <div> 
@@ -138,7 +159,7 @@ class App extends React.Component{
                 </ButtonGroup>
               </div>
               <div style={{position: 'relative', 'top': '10px'}}>
-                {movies.map(movie => <ExpansionPanelOne movie={movie.title} deleteMovie ={this.deleteMovie} id={movie.id}/>)}
+                {list}
               </div>
             </div>
         )
