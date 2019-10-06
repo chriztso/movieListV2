@@ -43,7 +43,6 @@ class ExpansionPanelOne extends React.Component{
     findMovie(movie){
       Axios.get(`https://api.themoviedb.org/3/search/movie?api_key=6a4cdf5cf8660cfa5ffb53f7b8741cb3&language=en-US&page=1&include_adult=false&query=${movie}`)
       .then((data) => {
-        console.log(data.data.results[0]); 
         if(data.data.results[0]){
           this.setState({info: true})
           const {year, release_date, vote_average, popularity, vote_count} = data.data.results[0]; 
